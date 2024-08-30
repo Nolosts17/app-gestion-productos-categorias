@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Categorias from './components/Categorias';
+import Productos from './components/Productos';
+import { Menubar } from 'primereact/menubar';
 
-function App() {
+const App: React.FC = () => {
+  const items = [
+    {
+      label: 'Categorias',
+      icon: 'pi pi-list',
+      command: () => window.location.href = '/categorias'
+    },
+    {
+      label: 'Productos',
+      icon: 'pi pi-box',
+      command: () => window.location.href = '/productos'
+    }
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <header style={{ padding: '1rem', textAlign: 'center', backgroundColor: '#f4f4f4' }}>
+          <h1>Gestión de Productos y Categorías</h1>
+        </header>
+        
+        <Menubar model={items} />
+        
+        <Routes>
+          <Route path="/categorias" element={<Categorias />} />
+          <Route path="/productos" element={<Productos />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
+
